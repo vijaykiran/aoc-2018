@@ -964,8 +964,3 @@
                 [(conj ns nf) nf])))
           [#{} 0]
           (cycle (read-string (str "(" input ")")))))
-
-(comment
-  (one-solution)
-  (two-solution)
-  )
