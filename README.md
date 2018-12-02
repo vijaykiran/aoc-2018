@@ -2,6 +2,14 @@
 
 Advent of Code 2018
 
+If it works, it is done.
+
+Non-Goals
+- Code readability
+- Tests
+- Optimisations
+
+
 ## License
 
 Copyright © 2018 Vijay Kiran
