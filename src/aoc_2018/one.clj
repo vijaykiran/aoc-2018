@@ -952,15 +952,18 @@
 +14
 +75784")
 
+
+(def ins (read-string
+          (str "(" input ")")))
+
 (defn one []
-  (eval (read-string
-         (str "(+ " input ")"))))
+  (apply + ins))
 
 (defn two []
-  (reduce (fn [[ns fq] n]
+  (reduce (fn [[fqs fq] n]
             (let [nf (+ n fq)]
-              (if (contains? ns nf)
+              (if (contains? fqs nf)
                 (reduced nf)
-                [(conj ns nf) nf])))
+                [(conj fqs nf) nf])))
           [#{} 0]
-          (cycle (read-string (str "(" input ")")))))
+          (cycle ins)))
