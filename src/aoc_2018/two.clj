@@ -71,7 +71,7 @@ uncipagzwtnkeslgvxjobmkfyr
 uqcipadzwtnhehlgvxjohdkfyr
 uqcipadzwtnheslgvxjobmspyz
 uccipadzwtnhvsltvxjobmkfyr
-uacipagzwtnheslgvxjoqmkfyr
+  uacipagzwtnheslgvxjoqmkfyr
 tqcipaduwtnheslgvxjobmmfyr
 uqcipadzwtnheslgvxqebmifyr
 uecipadthtnheslgvxjobmkfyr
@@ -263,10 +263,8 @@ uqcipadzwtnhetcgvxgobmkfyr")
                  vals
                  frequencies
                  (select-keys [2 3])
-                 (update 2
-                         (fnil two? 0))
-                 (update 3
-                         (fnil two? 0)))
+                 (update 2 (fnil two? 0))
+                 (update 3 (fnil two? 0)))
             (str/split input #"\n"))
         bs (reduce
             #(assoc %1
@@ -275,3 +273,17 @@ uqcipadzwtnhetcgvxgobmkfyr")
             {2 0, 3 0}
             as)]
     (* (get bs 2) (get bs 3))))
+
+;;; Two
+
+(defn two []
+  (let [ss (sort
+            (mapv str/trim (str/split input #"\n")))
+        ts (reduce (fn [v1 v2]
+                     (let [dfs (map #(- (int %1) (int %2)) v1 v2)]
+                       (if (= (count (filter #(not (= 0 %)) dfs)) 1)
+                         (reduced [v1 v2])
+                         v2)))
+                   ss)
+        [xs ys] ts]
+    (apply str (map #(if (= %1 %2) %1 "") xs ys))))
